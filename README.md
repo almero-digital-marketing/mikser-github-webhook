@@ -3,8 +3,8 @@ A [Mikser](https://github.com/almero-digital-marketing/mikser) plugin for integr
 
 ## Installation
 1. Inside project folder `npm install --save  mikser-github-webhook`
-2. Add plugin configuration inside `mikser.yml`
-3. Add plugin to the list of mikser plugins inside `mikser.yml`
+2. Add the plugin configuration inside `mikser.yml`
+3. Add the plugin to the list of mikser plugins inside `mikser.yml`
 
 ## Plugin configuration
 ```yaml
