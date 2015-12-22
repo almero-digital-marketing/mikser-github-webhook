@@ -1,0 +1,18 @@
+{
+  "name": "mikser-github-webhook",
+  "version": "0.0.1",
+  "description": "A Mikser plugin for integrating web site generation with GitHub webhooks",
+  "main": "index.js",
+  "keywords": [
+    "github",
+    "webhooks",
+    "mikser"
+  ],
+  "dependencies": {},
+  "author": "Almero Digital Marketing (http://almero.com)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/almero-digital-marketing/mikser-github-webhook.git"
+  },
+  "license": "MIT"
+}
