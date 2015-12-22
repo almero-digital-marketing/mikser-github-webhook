@@ -14,19 +14,20 @@ module.exports = function (mikser) {
 		var webhook = webhookHandler({ path: mikser.config.webhook.url, secret: mikser.config.webhook.secret });
 		console.log('Webhook: http://localhost:' + mikser.config.serverPort + mikser.config.webhook.url );
 		webhook.on('push', (event) => {
-			exec(mikser.config.webhook.command).then((stdout, stderr) => {
-				console.log(stdout);
-				if (stderr) {
-					console.log(stderr);
-				}
-			}).then(() => {
-				if (!mikser.options.watch) {
-					mikser.compilator.compile()
-						.then(mikser.manager.copy)
-						.then(mikser.manager.glob)
-						.then(mikser.scheduler.process);							
-				}
-			});
+			mikser.watcher.stop().then(() => {
+				return exec(mikser.config.webhook.command).then((stdout, stderr) => {
+					console.log(stdout);
+					if (stderr) {
+						console.log(stderr);
+					}
+				});
+			})
+			.then(mikser.compilator.compile)
+			.then(mikser.manager.copy)
+			.then(mikser.manager.glob)
+			.then(mikser.scheduler.process)
+			.then(mikser.server.refresh)
+			.then(mikser.watcher.start);
 		});
 		app.use(webhook);
 	});

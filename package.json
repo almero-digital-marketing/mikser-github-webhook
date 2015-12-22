@@ -1,6 +1,6 @@
 {
   "name": "mikser-github-webhook",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A Mikser plugin for integrating web site generation with GitHub webhooks",
   "main": "index.js",
   "keywords": [
