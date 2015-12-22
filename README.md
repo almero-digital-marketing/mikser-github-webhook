@@ -8,7 +8,7 @@ A [Mikser](https://github.com/almero-digital-marketing/mikser) plugin for integr
 
 ## Plugin configuration
 ```yaml
-plugins: […, 'github-webhook']
+plugins: ['github-webhook', …]
 webhook:
   url: '/webhook'
   secret: password
