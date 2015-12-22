@@ -12,9 +12,9 @@ plugins: […, 'github-webhook']
 webhook:
   url: '/webhook'
   secret: sDtUTCMPQ6fiK5wy
-  command: svn up
+  command: git pull
 ```
 
 * `url`: Url used to expose the webhook. Default: `/webhook`
 * `secret`: The key used to hash the payload by GitHub that we verify against, should match what you tell GitHub
-* `command`: A system command to execute. Command is executed inside the project folder. Default `git pull`
+* `command`: A system command to execute prior to the generation. The command is executed inside the project folder. Default `git pull`
