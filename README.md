@@ -1,5 +1,5 @@
 ## Mikser GitHub webhooks
-A Mikser plugin for integrating web site generation with GitHub webhooks.
+A [Mikser](https://github.com/almero-digital-marketing/mikser) plugin for integrating web site generation with GitHub webhooks.
 
 ## Installation
 1. Inside project folder `npm install --save  mikser-github-webhook`
