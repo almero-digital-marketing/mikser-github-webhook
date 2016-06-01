@@ -5,6 +5,7 @@ var webhookHandler = require('github-webhook-handler');
 var exec = Promise.promisify(require('child_process').exec);
 var _ = require('lodash');
 var fs = require('fs-extra-promise');
+var S = require('string');
 
 module.exports = function (mikser) {
 	mikser.config = _.defaultsDeep(mikser.config, {
@@ -15,7 +16,7 @@ module.exports = function (mikser) {
 		let secret = mikser.config.webhook.secret;
 		if (fs.existsSync(secret)) {
 			secret = fs.readFileSync(secret, {encoding: 'utf8'});
-			secret = _.trim(secret);
+			secret = S(secret).trim().s;
 		}
 		var webhook = webhookHandler({ path: mikser.config.webhook.url, secret: secret });
 		console.log('Webhook: http://localhost:' + mikser.config.serverPort + mikser.config.webhook.url );
@@ -28,11 +29,11 @@ module.exports = function (mikser) {
 					}
 				});
 			})
-			.then(mikser.compilator.compile)
-			.then(mikser.manager.copy)
+			.then(mikser.tools.compile)
+			.then(mikser.manager.sync)
 			.then(mikser.manager.glob)
 			.then(mikser.scheduler.process)
-			.then(mikser.server.refresh)
+			.then(mikser.tools.build)
 			.then(mikser.watcher.start);
 		});
 		webhook.on('error', function (err) {
