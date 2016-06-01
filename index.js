@@ -33,7 +33,6 @@ module.exports = function (mikser) {
 			.then(mikser.manager.sync)
 			.then(mikser.manager.glob)
 			.then(mikser.scheduler.process)
-			.then(mikser.tools.build)
 			.then(mikser.watcher.start);
 		});
 		webhook.on('error', function (err) {
