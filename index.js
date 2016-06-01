@@ -34,7 +34,7 @@ module.exports = function (mikser) {
 			.then(mikser.server.refresh)
 			.then(mikser.watcher.start);
 		});
-		handler.on('error', function (err) {
+		webhook.on('error', function (err) {
 			mikser.diagnostics.log('error','Webhook error: ' + err.message);
 		});
 		app.use(webhook);
