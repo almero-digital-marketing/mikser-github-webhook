@@ -4,6 +4,7 @@ var Promise = require('bluebird');
 var webhookHandler = require('github-webhook-handler');
 var exec = Promise.promisify(require('child_process').exec);
 var _ = require('lodash');
+var fs = require('fs-extra-promise');
 
 module.exports = function (mikser) {
 	mikser.config = _.defaultsDeep(mikser.config, {
@@ -11,7 +12,11 @@ module.exports = function (mikser) {
 	});
 
 	mikser.on('mikser.server.listen', (app) => {
-		var webhook = webhookHandler({ path: mikser.config.webhook.url, secret: mikser.config.webhook.secret });
+		let secret = mikser.config.webhook.secret;
+		if (fs.existsSync(source)) {
+			secret = fs.readFileSync(source, {encoding: 'utf8'});
+		}
+		var webhook = webhookHandler({ path: mikser.config.webhook.url, secret: secret });
 		console.log('Webhook: http://localhost:' + mikser.config.serverPort + mikser.config.webhook.url );
 		webhook.on('push', (event) => {
 			mikser.watcher.stop().then(() => {
@@ -28,6 +33,9 @@ module.exports = function (mikser) {
 			.then(mikser.scheduler.process)
 			.then(mikser.server.refresh)
 			.then(mikser.watcher.start);
+		});
+		handler.on('error', function (err) {
+			mikser.diagnostics.log('error','Webhook error: ' + err.message);
 		});
 		app.use(webhook);
 	});
