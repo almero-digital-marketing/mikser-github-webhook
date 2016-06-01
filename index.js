@@ -15,6 +15,7 @@ module.exports = function (mikser) {
 		let secret = mikser.config.webhook.secret;
 		if (fs.existsSync(secret)) {
 			secret = fs.readFileSync(secret, {encoding: 'utf8'});
+			secret = _.trim(secret);
 		}
 		var webhook = webhookHandler({ path: mikser.config.webhook.url, secret: secret });
 		console.log('Webhook: http://localhost:' + mikser.config.serverPort + mikser.config.webhook.url );

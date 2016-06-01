@@ -1,6 +1,6 @@
 {
   "name": "mikser-github-webhook",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "A Mikser plugin for integrating web site generation with GitHub webhooks",
   "main": "index.js",
   "keywords": [
@@ -9,10 +9,10 @@
     "mikser"
   ],
   "dependencies": {
-    "bluebird": "^3.0.5",
+    "bluebird": "^3.4.0",
     "fs-extra-promise": "^0.3.1",
     "github-webhook-handler": "^0.5.0",
-    "lodash": "^3.10.1"
+    "lodash": "^4.13.1"
   },
   "author": "Almero Digital Marketing (http://almero.com)",
   "repository": {
